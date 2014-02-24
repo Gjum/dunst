@@ -192,6 +192,11 @@ void load_settings(char *cmdline_config_path)
             option_get_string("global", "browser", "-browser", browser,
                               "path to browser");
 
+        settings.regex_rules =
+            option_get_bool("global", "regex_rules",
+                            "-regex_rules", false,
+                            "use regex in rules");
+
         settings.frame_width =
             option_get_int("frame", "width", "-frame_width", frame_width,
                            "Width of frame around window");
