@@ -197,6 +197,28 @@ void load_settings(char *cmdline_config_path)
                             "-regex_rules", false,
                             "use regex in rules");
 
+        {
+                char *c = option_get_string("global", "icon_position",
+                                            "-icon_position", "off",
+                                            "Align icons left/right/off");
+                if (strlen(c) > 0) {
+                        if (strcmp(c, "left") == 0)
+                                settings.icon_position = icons_left;
+                        else if (strcmp(c, "right") == 0)
+                                settings.icon_position = icons_right;
+                        else if (strcmp(c, "off") == 0)
+                                settings.icon_position = icons_off;
+                        else
+                                fprintf(stderr,
+                                        "Warning: unknown icon position: %s\n", c);
+                        free(c);
+                }
+        }
+
+        settings.icon_folders =
+            option_get_string("global", "icon_folders", "-icon_folders", icon_folders,
+                              "paths to default icons");
+
         settings.frame_width =
             option_get_int("frame", "width", "-frame_width", frame_width,
                            "Width of frame around window");
