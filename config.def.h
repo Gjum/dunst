@@ -50,6 +50,9 @@ char *dmenu = "/usr/bin/dmenu";
 
 char *browser = "/usr/bin/firefox";
 
+/* paths to default icons */
+char *icon_folders = "/usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/";
+
 /* follow focus to different monitor and display notifications there?
  * possible values:
  * FOLLOW_NONE

@@ -42,6 +42,9 @@ typedef struct _settings {
         char *dmenu;
         char **dmenu_cmd;
         char *browser;
+        bool regex_rules;
+        enum icon_position_t icon_position;
+        char *icon_folders;
         enum follow_mode f_mode;
         keyboard_shortcut close_ks;
         keyboard_shortcut close_all_ks;

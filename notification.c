@@ -435,6 +435,10 @@ int notification_init(notification * n, int id)
         if (settings.print_notifications)
                 notification_print(n);
 
+        if (n->script) {
+                notification_run_script(n);
+        }
+
         return n->id;
 }
 

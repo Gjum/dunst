@@ -138,6 +138,15 @@
     # Browser for opening urls in context menu.
     browser = /usr/bin/firefox -new-tab
 
+    # Use regular expressions in rules
+    regex_rules = no
+
+    # Align icons left/right/off
+    icon_position = off
+
+    # Paths to default icons.
+    icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+
 [frame]
     width = 3
     color = "#aaaaaa"

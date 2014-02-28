@@ -2,9 +2,11 @@
 
 #include <glib.h>
 #include <fnmatch.h>
+#include <regex.h>
 
 #include "dunst.h"
 #include "rules.h"
+#include "settings.h"
 
 /*
  * Apply rule to notification.
@@ -56,14 +58,32 @@ void rule_init(rule_t * r)
 }
 
 /*
- * Check whether rule should be applied to n.
+ * Check whether rule should be applied to notification.
  */
+bool regex_match();
 bool rule_matches_notification(rule_t * r, notification * n)
 {
+        if (settings.regex_rules)
+                return ((!r->appname || !regex_match(r->appname, n->appname))
+                        && (!r->summary || !regex_match(r->summary, n->summary))
+                        && (!r->body || !regex_match(r->body, n->body))
+                        && (!r->icon || !regex_match(r->icon, n->icon)));
 
         return ((!r->appname || !fnmatch(r->appname, n->appname, 0))
                 && (!r->summary || !fnmatch(r->summary, n->summary, 0))
                 && (!r->body || !fnmatch(r->body, n->body, 0))
                 && (!r->icon || !fnmatch(r->icon, n->icon, 0)));
+}
+/* returns 0 if regex_string matches match_string */
+bool regex_match(char *regex_string, char *match_string)
+{
+        regex_t regex;
+        int reti;
+
+        regcomp(&regex, regex_string, 0);
+        reti = regexec(&regex, match_string, 0, NULL, 0);
+        regfree(&regex);
+
+        return reti;
 }
 /* vim: set ts=8 sw=8 tw=0: */
